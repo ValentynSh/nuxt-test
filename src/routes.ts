@@ -61,10 +61,7 @@ function routes(app: Express) {
    *      400:
    *        description: Bad request
    */
-  var corsOptions = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+  
 
 
   app.post("/api/users", validateResource(createUserSchema), createUserHandler);
