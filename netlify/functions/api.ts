@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 import serverless from 'serverless-http';
 import cors from 'cors'
+import connect from "../../src/utils/connect";
 import { createUserHandler, findUsersHandler } from "../../src/controller/user.controller";
 const api = express();
 
@@ -14,7 +15,13 @@ var corsOptions = {
 
 
 router.get("/user", cors(corsOptions),  findUsersHandler);
-
+api.listen( async () => {
+   
+  
+    await connect();
+  
+    
+  });
 api.use('/api/', router);
 
 export const handler = serverless(api);
