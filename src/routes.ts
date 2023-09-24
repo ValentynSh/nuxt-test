@@ -68,7 +68,7 @@ function routes(app: Express) {
 
 
   app.post("/api/users", validateResource(createUserSchema), createUserHandler);
-  app.get("/api/user", cors(corsOptions),  findUsersHandler);
+  // app.get("/api/user", cors(corsOptions),  findUsersHandler);
 
   /**
    * @openapi
