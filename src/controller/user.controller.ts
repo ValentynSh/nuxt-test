@@ -4,7 +4,6 @@ import { CreateUserInput } from "../schema/user.schema";
 import { createUser } from "../service/user.service";
 import logger from "../utils/logger";
 import UserModel from "../models/user.model"
-import { getCookie,deleteCookie, setCookie } from 'h3'
 
 const accessTokenCookieOptions = {
   // domain: 'escape-dev.netlify.app',
@@ -31,7 +30,7 @@ export async function findUsersHandler(
   req: Request, res: Response
 ) {
   const users = await UserModel.find();
-  setCookie(event,"refreshToken",'refreshToken',accessTokenCookieOptions);
-  setCookie(event,"ACCEShToken",'ACCESShToken',accessTokenCookieOptions);
+  res.setHeader("x-access-token", 'newAccessToken');
+  res.setHeader("x-access-token", 'newAccessToken2');
   return res.send(users);;
 }
