@@ -9,7 +9,7 @@ const router = Router();
 router.get('/hello', (req, res) => res.send('Hello World!'));
 
 var corsOptions = {
-    origin: 'https://lucent-valkyrie-311905.netlify.app/',
+    origin: '*',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
