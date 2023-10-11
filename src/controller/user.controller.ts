@@ -4,7 +4,17 @@ import { CreateUserInput } from "../schema/user.schema";
 import { createUser } from "../service/user.service";
 import logger from "../utils/logger";
 import UserModel from "../models/user.model"
+import { getCookie,deleteCookie, setCookie } from 'h3'
 
+const accessTokenCookieOptions = {
+  // domain: 'escape-dev.netlify.app',
+ 
+  httpOnly: true,
+  maxAge: -1, // 15 mins
+  path: '/',
+  sameSite: "lax" as "lax",
+  secure: true,//use in http, in case of use https need to set true
+};
 export async function createUserHandler(
   req: Request<{}, {}, CreateUserInput["body"]>,
   res: Response
@@ -21,5 +31,7 @@ export async function findUsersHandler(
   req: Request, res: Response
 ) {
   const users = await UserModel.find();
+  setCookie(event,"refreshToken",'refreshToken',accessTokenCookieOptions);
+  setCookie(event,"ACCEShToken",'ACCESShToken',accessTokenCookieOptions);
   return res.send(users);;
 }
